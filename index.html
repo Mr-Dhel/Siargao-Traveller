@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="assets/images/web-logo-cover/web logo.png">
+  <title>Siargao Traveller</title>
+  <meta name="description" content="Siargao Traveller helps visitors find local Siargao hotels, homestays, resorts, surf lessons, rides, scooter rentals, board rentals, and island experiences.">
+  <meta name="keywords" content="Siargao Traveller, Siargao hotels, Siargao homestays, Siargao resorts, Siargao surf lessons, Siargao scooter rentals, Siargao board rentals, Siargao rides, Siargao marketplace">
+  <link rel="canonical" href="https://siargao-traveller.onrender.com/">
+  <meta property="og:title" content="Siargao Traveller">
+  <meta property="og:description" content="Find local Siargao stays, services, rentals, surf lessons, rides, and island experiences.">
+  <meta property="og:url" content="https://siargao-traveller.onrender.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://siargao-traveller.onrender.com/assets/images/web-logo-cover/web%20logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Siargao Traveller">
+  <meta name="twitter:description" content="Find local Siargao stays, services, rentals, surf lessons, rides, and island experiences.">
+  <meta name="twitter:image" content="https://siargao-traveller.onrender.com/assets/images/web-logo-cover/web%20logo.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .contact-modal {
+      max-width: 520px;
+      width: min(92vw, 520px);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      box-sizing: border-box;
+      background: linear-gradient(180deg, #fffdf8 0%, #f7f9ff 100%);
+      box-shadow: 0 18px 45px rgba(9, 50, 82, 0.18);
+    }
+
+    .contact-modal h2 {
+      margin: 0 0 18px;
+      font-size: 1.7rem;
+      color: #0d3b66;
+      text-align: center;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(13, 59, 102, 0.04);
+      border: 1px solid rgba(13, 59, 102, 0.08);
+    }
+
+    .contact-row strong {
+      color: #0d3b66;
+      font-size: 0.92rem;
+    }
+
+    .contact-row span {
+      text-align: right;
+      font-size: 0.95rem;
+      color: #1f2d3d;
+      word-break: break-word;
+    }
+
+    .contact-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact-btn {
+      appearance: none;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 18px rgba(13, 59, 102, 0.14);
+    }
+
+    .contact-btn:hover,
+    .contact-btn:focus-visible {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .contact-btn.facebook { background: linear-gradient(135deg, #1877f2, #3b82f6); }
+    .contact-btn.instagram { background: linear-gradient(135deg, #e1306c, #f77737); }
+    .contact-btn.whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+    .contact-btn.telegram { background: linear-gradient(135deg, #229ed9, #2aabee); }
+    .contact-btn.viber { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .contact-btn.email { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+
+    .contact-note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 0.94rem;
+      color: #374151;
+      line-height: 1.55;
+    }
+
+    .copy-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.92);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 2000;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      .contact-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-row span {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Logo + Search + Navigation -->
+  <header>
+    <div class="header-left">
+      <img src="assets/images/web-logo-cover/web logo.png" alt="Siargao Traveller Logo" class="logo">
+      <form class="search-bar" id="siteSearch">
+        <input type="text" id="siteSearchInput" placeholder="Search..." aria-label="Search site" autocomplete="off" />
+        <button type="submit">Go</button>
+      </form>
+    </div>
+    <nav class="header-right">
+      <ul class="nav-menu">
+        <li><a href="promo/">Promo</a></li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Accommodation</a>
+          <ul class="dropdown">
+            <li><a href="hotels/">Hotels</a></li>
+            <li><a href="homestays/">Homestays</a></li>
+            <li><a href="resorts/">Resorts</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Services</a>
+          <ul class="dropdown">
+            <li><a href="surf-lessons/">Surf Lessons</a></li>
+            <li><a href="rides/">Rides</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Rentals</a>
+          <ul class="dropdown">
+            <li><a href="scooters/">Scooters</a></li>
+            <li><a href="boards/">Boards</a></li>
+          </ul>
+        </li>
+        <li><a href="" onclick="event.preventDefault(); openModal('modalContact')">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contact Modal -->
+  <div id="modalContact" class="modal">
+    <div class="modal-content contact-modal">
+      <span class="close" onclick="closeModal('modalContact')">&times;</span>
+      <h2>Contact Details</h2>
+
+      <div class="contact-list">
+        <div class="contact-row"><strong>Name:</strong> <span>Dhel Carmelo Dumale</span></div>
+        <div class="contact-row"><strong>Location:</strong> <span>Siargao Island, Philippines</span></div>
+      </div>
+
+      <div class="contact-actions">
+        <button class="contact-btn email" type="button" onclick="copyEmailAddress()">Email</button>
+        <button class="contact-btn facebook" type="button" onclick="openContactAction('https://www.facebook.com/profile.php?id=61592682848686', 'fb://profile/61592682848686')">Facebook</button>
+        <button class="contact-btn instagram" type="button" onclick="openContactAction('https://www.instagram.com/dhelcarmelo?igsh=b3h5enN3OHE5', 'instagram://user?username=dhelcarmelo')">Instagram</button>
+        <button class="contact-btn telegram" type="button" onclick="openContactAction('https://t.me/boost/siargao_travellers_guide', 'tg://resolve?domain=siargao_travellers_guide')">Telegram</button>
+        <button class="contact-btn whatsapp" type="button" onclick="openContactAction('https://whatsapp.com/channel/0029VbClWic2phHFfONZvj37')">WhatsApp</button>
+        <button class="contact-btn viber" type="button" onclick="openContactAction('https://invite.viber.com/?g2=AQBISutImoJ1HFb7zLf36PV1iqYOrTmWmFK7RM2q2jBGFq%2Fx8zHzpI8OvSLDbuyf')">Viber</button>
+      </div>
+
+      <p class="contact-note">You can use this platform to report abusive sellers, ask questions, and provide feedback.</p>
+    </div>
+  </div>
+
+  <!-- Hero Section with Tropical Background -->
+  <section class="hero">
+    <img src="assets/images/web-logo-cover/landing-bg.png" alt="Tropical Background" class="hero-bg">
+    <div class="hero-content">
+      <h1>Discover Siargao’s Local Treasures</h1>
+      <p>Authentic island experiences, from stays to services and rentals.</p>
+      <a href="products/" class="btn hero-btn">Browse Marketplace</a>
+    </div>
+  </section>
+
+    <!-- Why Siargao Section -->
+  <section class="why-siargao">
+    <div class="container">
+      <h2>Why Siargao?</h2>
+      <p>
+        Siargao Island is the Surf Capital of the Philippines, famous for its world-class waves at Cloud 9. 
+        Beyond surfing, visitors can enjoy island-hopping to Naked, Daku, and Guyam Islands, swim in the 
+        emerald waters of Sugba Lagoon, and explore the natural tidal pools of Magpupungko. 
+        With its laid-back vibe, vibrant food scene, and eco-friendly culture, Siargao offers both adventure 
+        and relaxation — making it one of the best tropical escapes in the world.
+      </p>
+    </div>
+  </section>
+
+<!-- Places to Visit Section -->
+<section class="places">
+  <div class="container">
+    <h2>Places to Visit</h2>
+    <p class="search-status" id="searchStatus" aria-live="polite"></p>
+    <div class="places-row">
+
+      <!-- Cloud 9 -->
+      <div class="place-slider" data-search-item data-keywords="cloud 9 cloud nine surf surfing waves boardwalk tower">
+        <h3>Cloud 9</h3>
+        <div class="slider" id="cloud9">
+          <img src="assets/images/places-to-visit/cloud1.jpg" alt="Cloud 9 Surf Tower" class="active">
+          <img src="assets/images/places-to-visit/cloud2.jpg" alt="Cloud 9 Waves">
+          <img src="assets/images/places-to-visit/cloud3.jpg" alt="Cloud 9 Boardwalk">
+        </div>
+      </div>
+
+      <!-- Sugba Lagoon -->
+      <div class="place-slider" data-search-item data-keywords="sugba lagoon paddleboarding paddle board cliff jump swimming">
+        <h3>Sugba Lagoon</h3>
+        <div class="slider" id="sugba">
+          <img src="assets/images/places-to-visit/sugba1.jpg" alt="Sugba Lagoon View" class="active">
+          <img src="assets/images/places-to-visit/sugba2.jpg" alt="Paddleboarding Sugba Lagoon">
+          <img src="assets/images/places-to-visit/sugba3.jpg" alt="Cliff Jump Sugba Lagoon">
+        </div>
+      </div>
+
+      <!-- Magpupungko Rock Pools -->
+      <div class="place-slider" data-search-item data-keywords="magpupungko rock pools rock pool tidal pools low tide clear waters">
+        <h3>Magpupungko Rock Pools</h3>
+        <div class="slider" id="magpupungko">
+          <img src="assets/images/places-to-visit/pungko1.jpg" alt="Rock Pools" class="active">
+          <img src="assets/images/places-to-visit/pungko2.jpg" alt="Clear Waters">
+          <img src="assets/images/places-to-visit/cloud3.jpg" alt="Low Tide Pools">
+        </div>
+      </div>
+
+      <!-- Island Hopping -->
+      <div class="place-slider" data-search-item data-keywords="island hopping naked island daku island guyam island sandbar feast paradise tour">
+        <h3>Island Hopping</h3>
+        <div class="slider" id="islands">
+          <img src="assets/images/places-to-visit/daku.jpg" alt="Naked Island Sandbar" class="active">
+          <img src="assets/images/places-to-visit/naked.jpg" alt="Daku Island Feast">
+          <img src="assets/images/places-to-visit/guyam.jpg" alt="Guyam Island Paradise">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="places event">
+  <div class="container">
+    <h2>Siargao Events</h2>
+    <div class="event-card" data-search-item data-keywords="events siargao event festival surf competition wsl surfing">
+      <div class="event-image slider" id="events">
+        <img src="assets/images/events/wsl.jpg" alt="Siargao Surfing Event" class="active">
+      </div>
+      <div class="event-details">
+        <h3>World Surfing League (WSL)</h3>
+        <p>Today, the World Surf League (WSL) announced the addition of Cloud 9, Siargao, Philippines, to the 2026 Championship Tour (CT) from October 31 to November 10. The Philippines Pro presented by the Philippine Sports Commission has been upgraded from a QS 6,000 International to a CT stop for the 2026 and 2027 seasons.</p>
+        <a href="https://www.worldsurfleague.com/posts/557079/world-surf-league-announces-cloud-9-philippines-as-new-stop-on-2026-championship-tour-schedule" class="btn event-btn" target="_blank" rel="noopener noreferrer">Know More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section (moved OUTSIDE places-row) -->
+<section class="cta">
+  <h2>Visit Siargao Now!</h2>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Siargao Traveller | Made with ❤️ by a Siargaonon</p>
+  </footer>
+
+  <div id="copyToast" class="copy-toast" aria-live="polite">Email copied</div>
+
+<script>
+function initSlider(sliderId) {
+  const slider = document.getElementById(sliderId);
+  const images = slider.querySelectorAll('img');
+  let index = 0;
+
+  setInterval(() => {
+    images[index].classList.remove('active');
+    index = (index + 1) % images.length;
+    images[index].classList.add('active');
+  }, 3000); // change every 3s
+}
+
+['cloud9','sugba','magpupungko','islands','events'].forEach(initSlider);
+
+function openModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth <= 768;
+}
+
+function openContactAction(webUrl, appUrl = '') {
+  const targetUrl = (isMobileDevice() && appUrl) ? appUrl : webUrl;
+
+  window.location.href = targetUrl;
+
+  setTimeout(() => {
+    window.open(webUrl, '_blank', 'noopener,noreferrer');
+  }, 1200);
+}
+
+function showCopyToast(message = 'Email copied') {
+  const toast = document.getElementById('copyToast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(showCopyToast.timeoutId);
+  showCopyToast.timeoutId = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 1600);
+}
+
+async function copyEmailAddress() {
+  const email = 'dumaledhelcarmelo@gmail.com';
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(email);
+    } else {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = email;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'fixed';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    }
+
+    showCopyToast('Email copied: ' + email);
+  } catch (error) {
+    showCopyToast('Copy failed. Email: ' + email);
+  }
+}
+
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', function(e) {
+    e.preventDefault(); // stop link navigation
+    const parent = this.parentElement;
+    const dropdown = parent.querySelector('.dropdown');
+
+    // close other open dropdowns
+    document.querySelectorAll('.dropdown').forEach(menu => {
+      if (menu !== dropdown) menu.style.display = 'none';
+    });
+
+    // toggle current dropdown
+    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+  });
+});
+
+const searchRoutes = [
+  {
+    title: 'Hotels',
+    url: 'hotels/',
+    keywords: ['hotel', 'hotels', 'room', 'rooms', 'accommodation', 'accommodations', 'stay', 'stays', 'lodging']
+  },
+  {
+    title: 'Homestays',
+    url: 'homestays/',
+    keywords: ['homestay', 'homestays', 'home stay', 'local stay', 'guesthouse', 'guest house', 'accommodation', 'stay']
+  },
+  {
+    title: 'Resorts',
+    url: 'resorts/',
+    keywords: ['resort', 'resorts', 'villa', 'beach resort', 'accommodation', 'stay']
+  },
+  {
+    title: 'Surf Lessons',
+    url: 'surf-lessons/',
+    keywords: ['surf', 'surfing', 'surf lesson', 'surf lessons', 'lesson', 'lessons', 'instructor']
+  },
+  {
+    title: 'Rides',
+    url: 'rides/',
+    keywords: ['ride', 'rides', 'transport', 'transportation', 'tour', 'tours', 'driver', 'van', 'car', 'pickup']
+  },
+  {
+    title: 'Scooters',
+    url: 'scooters/',
+    keywords: ['scooter', 'scooters', 'motorbike', 'motor bike', 'motorcycle', 'bike', 'rental', 'rentals']
+  },
+  {
+    title: 'Boards',
+    url: 'boards/',
+    keywords: ['board', 'boards', 'surfboard', 'surfboards', 'rental', 'rentals']
+  },
+  {
+    title: 'Marketplace',
+    url: 'products/',
+    keywords: ['marketplace', 'product', 'products', 'shop', 'seller', 'buy', 'service', 'services', 'rental', 'rentals']
+  }
+];
+
+const siteSearch = document.getElementById('siteSearch');
+const siteSearchInput = document.getElementById('siteSearchInput');
+const searchStatus = document.getElementById('searchStatus');
+const searchablePlaces = document.querySelectorAll('[data-search-item]');
+
+function cleanSearchText(text) {
+  return text.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function clearPlaceSearch() {
+  searchablePlaces.forEach(item => item.classList.remove('is-search-match'));
+}
+
+function showSearchStatus(message) {
+  searchStatus.textContent = message;
+  searchStatus.classList.add('is-visible');
+}
+
+siteSearch.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const query = cleanSearchText(siteSearchInput.value);
+  clearPlaceSearch();
+
+  if (!query) {
+    showSearchStatus('Type a keyword like hotel, surf, scooter, Cloud 9, or island hopping.');
+    siteSearchInput.focus();
+    return;
+  }
+
+  const routeMatch = searchRoutes.find(route =>
+    route.keywords.some(keyword => query.includes(keyword) || keyword.includes(query))
+  );
+
+  if (routeMatch) {
+    window.location.href = routeMatch.url;
+    return;
+  }
+
+  const placeMatches = Array.from(searchablePlaces).filter(item => {
+    const searchableText = cleanSearchText(`${item.textContent} ${item.dataset.keywords || ''}`);
+    return searchableText.includes(query);
+  });
+
+  if (placeMatches.length > 0) {
+    placeMatches.forEach(item => item.classList.add('is-search-match'));
+    showSearchStatus(`${placeMatches.length} result${placeMatches.length === 1 ? '' : 's'} found for "${siteSearchInput.value.trim()}".`);
+    placeMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  showSearchStatus(`No result found for "${siteSearchInput.value.trim()}". Try hotel, surf, scooter, Cloud 9, Sugba, events, or island hopping.`);
+  document.querySelector('.places').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+</script>
+
+</body>
+</html>

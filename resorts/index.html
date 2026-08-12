@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="../assets/images/web-logo-cover/web logo.png">
+  <title>Siargao Resorts | Siargao Traveller</title>
+  <meta name="description" content="Explore Siargao resorts and beachfront stays for island vacations, surf trips, and relaxing tropical escapes.">
+  <meta name="keywords" content="Siargao resorts, Siargao beachfront resort, General Luna resort, Siargao accommodation, Siargao Traveller">
+  <link rel="canonical" href="https://siargao-traveller.onrender.com/resorts/">
+  <meta property="og:title" content="Siargao Resorts | Siargao Traveller">
+  <meta property="og:description" content="Explore local Siargao resort listings and beachfront stays.">
+  <meta property="og:url" content="https://siargao-traveller.onrender.com/resorts/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://siargao-traveller.onrender.com/assets/images/web-logo-cover/web%20logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .contact-modal {
+      max-width: 520px;
+      width: min(92vw, 520px);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      box-sizing: border-box;
+      background: linear-gradient(180deg, #fffdf8 0%, #f7f9ff 100%);
+      box-shadow: 0 18px 45px rgba(9, 50, 82, 0.18);
+    }
+
+    .contact-modal h2 {
+      margin: 0 0 18px;
+      font-size: 1.7rem;
+      color: #0d3b66;
+      text-align: center;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(13, 59, 102, 0.04);
+      border: 1px solid rgba(13, 59, 102, 0.08);
+    }
+
+    .contact-row strong {
+      color: #0d3b66;
+      font-size: 0.92rem;
+    }
+
+    .contact-row span {
+      text-align: right;
+      font-size: 0.95rem;
+      color: #1f2d3d;
+      word-break: break-word;
+    }
+
+    .contact-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact-btn {
+      appearance: none;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 18px rgba(13, 59, 102, 0.14);
+    }
+
+    .contact-btn:hover,
+    .contact-btn:focus-visible {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .contact-btn.facebook { background: linear-gradient(135deg, #1877f2, #3b82f6); }
+    .contact-btn.instagram { background: linear-gradient(135deg, #e1306c, #f77737); }
+    .contact-btn.whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+    .contact-btn.telegram { background: linear-gradient(135deg, #229ed9, #2aabee); }
+    .contact-btn.viber { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .contact-btn.email { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+
+    .contact-note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 0.94rem;
+      color: #374151;
+      line-height: 1.55;
+    }
+
+    .copy-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.92);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 2000;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      .contact-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-row span {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body class="marketplace-page">
+  <header>
+    <h1>Siargao Resorts Marketplace</h1>
+    <nav class="header-right">
+      <ul class="nav-menu">
+        <li><a href="../promo/">Promo</a></li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Accommodation</a>
+          <ul class="dropdown">
+            <li><a href="../hotels/">Hotels</a></li>
+            <li><a href="../homestays/">Homestays</a></li>
+            <li><a href="../resorts/">Resorts</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Services</a>
+          <ul class="dropdown">
+            <li><a href="../surf-lessons/">Surf Lessons</a></li>
+            <li><a href="../rides/">Rides</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-toggle">Rentals</a>
+          <ul class="dropdown">
+            <li><a href="../scooters/">Scooters</a></li>
+            <li><a href="../boards/">Boards</a></li>
+          </ul>
+        </li>
+        <li><a href="" onclick="event.preventDefault(); openModal('modalContact')">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="modalContact" class="modal">
+    <div class="modal-content contact-modal">
+      <span class="close" onclick="closeModal('modalContact')">&times;</span>
+      <h2>Contact Details</h2>
+
+      <div class="contact-list">
+        <div class="contact-row"><strong>Name:</strong> <span>Dhel Carmelo Dumale</span></div>
+        <div class="contact-row"><strong>Location:</strong> <span>Siargao Island, Philippines</span></div>
+      </div>
+
+      <div class="contact-actions">
+        <button class="contact-btn email" type="button" onclick="copyEmailAddress()">Email</button>
+        <button class="contact-btn facebook" type="button" onclick="openContactAction('https://www.facebook.com/profile.php?id=61592682848686', 'fb://profile/61592682848686')">Facebook</button>
+        <button class="contact-btn instagram" type="button" onclick="openContactAction('https://www.instagram.com/dhelcarmelo?igsh=b3h5enN3OHE5', 'instagram://user?username=dhelcarmelo')">Instagram</button>
+        <button class="contact-btn telegram" type="button" onclick="openContactAction('https://t.me/boost/siargao_travellers_guide', 'tg://resolve?domain=siargao_travellers_guide')">Telegram</button>
+        <button class="contact-btn whatsapp" type="button" onclick="openContactAction('https://whatsapp.com/channel/0029VbClWic2phHFfONZvj37')">WhatsApp</button>
+        <button class="contact-btn viber" type="button" onclick="openContactAction('https://invite.viber.com/?g2=AQBISutImoJ1HFb7zLf36PV1iqYOrTmWmFK7RM2q2jBGFq%2Fx8zHzpI8OvSLDbuyf')">Viber</button>
+      </div>
+
+      <p class="contact-note">You can use this platform to report abusive sellers, ask questions, and provide feedback.</p>
+    </div>
+  </div>
+
+  <main>
+  <div id="product-list" class="grid">
+
+<!-- Product Card -->
+<div class="product-card small">
+  <img src="../assets/images/accommodation/resort.jpg" alt="resort">
+  <h3>Resort Sample</h3>
+  <p>General Luna, Siargao</p>
+  <p>Juan Dela Cruz</p>
+  <p>₱15,000 per night</p>
+  <a href="#" class="btn" onclick="openModal('modalResort')">Contact Seller</a>
+</div>
+
+<!-- Hotel Modal -->
+<div id="modalResort" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalResort')">&times;</span>
+    <h2>Business Owner Details</h2>
+    <p><strong>Business:</strong> Siargao Resort's</p>
+    <p><strong>Owner:</strong> Juan Dela Cruz</p>
+    <p><strong>Email:</strong> juan@example.com</p>
+    <p><strong>Instagram:</strong> +63 912 345 6789</p>
+    <p><strong>Whatsapp:</strong> +63 912 345 6789</p>
+    <p><strong>Viber:</strong> +63 912 345 6789</p>
+    <p>Due to poor internet connection in the Island seller may take time to respond, you can contact the website support if you need assistance.</p>
+    <p>Thank You.</p>
+  </div>
+</div>
+
+
+<!-- Copy paste to add new Product and modal -->
+ <h1>Above is an example of Resorts, no actual sellers yet for this category.</h1>
+
+  </div>
+</main>
+
+
+  <footer>
+    <p>&copy; 2026 Siargao Traveller</p>
+  </footer>
+
+  <div id="copyToast" class="copy-toast" aria-live="polite">Email copied</div>
+
+  <script src="../assets/js/products.js"></script>
+<script>
+function openModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth <= 768;
+}
+
+function openContactAction(webUrl, appUrl = '') {
+  const targetUrl = (isMobileDevice() && appUrl) ? appUrl : webUrl;
+
+  window.location.href = targetUrl;
+
+  setTimeout(() => {
+    window.open(webUrl, '_blank', 'noopener,noreferrer');
+  }, 1200);
+}
+
+function showCopyToast(message = 'Email copied') {
+  const toast = document.getElementById('copyToast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(showCopyToast.timeoutId);
+  showCopyToast.timeoutId = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 1600);
+}
+
+async function copyEmailAddress() {
+  const email = 'dumaledhelcarmelo@gmail.com';
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(email);
+    } else {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = email;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'fixed';
+      tempInput.style.left = '-9999px';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    }
+
+    showCopyToast('Email copied: ' + email);
+  } catch (error) {
+    showCopyToast('Copy failed. Email: ' + email);
+  }
+}
+
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    const parent = this.parentElement;
+    const dropdown = parent.querySelector('.dropdown');
+
+    document.querySelectorAll('.dropdown').forEach(menu => {
+      if (menu !== dropdown) menu.style.display = 'none';
+    });
+
+    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+  });
+});
+</script>
+
+
+</body>
+</html>
